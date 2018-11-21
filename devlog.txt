@@ -33,4 +33,7 @@ Possible additional features:
        
 ==============================================================
 
-
+theodoreP -- 2018-11-20 20:19
+--------------------------------------------------------------
+Augmentation to the starter kit Ivan Zhang added FORGOT TO MAKE A DEVLOG ENTRY ON
+==============================================================

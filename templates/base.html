@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.0-rc.4/css/foundation.css">
+    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
+    <!--- This is the webpage title --->
+    <title>{% block title %}William Lu{% endblock %}</title>
+  </head>
+  <body>
+    <a href="/">navbar</a>
+    {% block content %}
+    CONTENT
+    {% endblock %}
+
+    &copy; William Lu
+  </body>
+</html>
+  
