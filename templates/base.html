@@ -7,7 +7,19 @@
     <title>{% block title %}William Lu{% endblock %}</title>
   </head>
   <body>
-    <a href="/">navbar</a>
+    <div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text"> Weather You'll See Pokemon</li>
+      <li>
+        <a href="#">Search by Location</a>
+      </li>
+      <li><a href="#">Random Location</a></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+  </div>
+</div>
     {% block content %}
     CONTENT
     {% endblock %}
