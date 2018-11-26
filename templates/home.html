@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
-
 {% block content %}
-<h1>hello</h1>
+        <h1>Weather Data</h1>
+        <p> </p>
+            <br>
+        <img src={{img}}>
+        <p> {{name}}: {{expl}} </p>
+	<p>Temperate Max:{{max}}</p>
+	<p>Temperate Min:{{min}}</p>
+	<p>Temperate Now:{{now}}</p>
+
+
 {% endblock %}
