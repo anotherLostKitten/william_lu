@@ -1,2 +1,2 @@
 clean:
-	rm *~* \#*\# *.pyc *.pyd *.pyo
+	rm *~* \#*\# *.pyc *.pyd *.pyo */*~* */\#*\#
