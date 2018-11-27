@@ -7,7 +7,9 @@
     <title>{% block title %}William Lu{% endblock %}</title>
   </head>
   <body>
-    <div class="top-bar">
+    
+  <div class="top-bar-container" data-sticky-container>
+      <div class="sticky sticky-topbar" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text"> Weather You'll See Pokemon</li>
@@ -20,7 +22,8 @@
   </div>
   <div class="top-bar-right">
   </div>
-</div>
+      </div>
+      </div>
     {% block content %}
     CONTENT
     {% endblock %}
