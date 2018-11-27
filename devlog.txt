@@ -47,3 +47,15 @@ ivanZ -- 2018-11-26 13:15
 --------------------------------------------------------------
 Added navbar with dummy links.
 ==============================================================
+
+theodoreP -- 2018-11-26 23:24
+--------------------------------------------------------------
+updates to plan, featuring...
+    compenent map that actually maps components, showing what files correspond to which tasks
+	additional specificity into what tasks will be preformed by which users
+	clarified functionality of local pokemon database
+	bug fixes and preformance improvements
+added dummy files for all necessary components, in the spirit of promoting proper modularity now rather than fixing it later
+
+TODO: aquire a highlighter so as to succesfully comlete 3nd task.
+==============================================================
