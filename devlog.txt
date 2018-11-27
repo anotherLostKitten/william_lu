@@ -57,5 +57,5 @@ updates to plan, featuring...
 	bug fixes and preformance improvements
 added dummy files for all necessary components, in the spirit of promoting proper modularity now rather than fixing it later
 
-TODO: aquire a highlighter so as to succesfully comlete 3nd task.
+TODO: acquire a highlighter so as to succesfully comlete 3nd task.
 ==============================================================
