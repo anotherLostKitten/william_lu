@@ -80,7 +80,7 @@ imadB -- 2018-11-27 13:20
 Created database with weather types and single pokemon
 ==============================================================
 
-imadB -- 2018-11-28 13:20
+imadB -- 2018-11-28 12:20
 --------------------------------------------------------------
 Created database functions to get weather and pokemon info based on inputed city
 ================================================================
@@ -88,3 +88,9 @@ Created database functions to get weather and pokemon info based on inputed city
 ivanZ -- 2018-11-28 12:45
 --------------------------------------------------------------
 Updated navbar with 'Pokedex' tab with links. Added Search Bar. Will make Search bar align right.
+==============================================================
+
+adilG -- 2018-11-28 12:45
+--------------------------------------------------------------
+Created function to show pokemon sprite with poke api
+==============================================================
