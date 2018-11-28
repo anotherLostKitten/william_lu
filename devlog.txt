@@ -64,3 +64,8 @@ added dummy files for all necessary components, in the spirit of promoting prope
 
 TODO: acquire a highlighter so as to succesfully comlete 3nd task.
 ==============================================================
+
+ivanZ -- 2018-11-27 13:23
+--------------------------------------------------------------
+Updated navbar with 'Pokedex' tab. Tried to make it sticky, did not work. Will focus on it as an "extra" feature.
+================================================================
