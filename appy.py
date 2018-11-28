@@ -17,6 +17,9 @@ app = Flask(__name__)
 def home():
     return render_template("home.html", **api.weather() )
 
+@app.route("/pokedex")
+def pokedex():
+    return render_template("poke_data.html")
 
 
 
