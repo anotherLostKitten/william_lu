@@ -7,7 +7,22 @@
     <title>{% block title %}William Lu{% endblock %}</title>
   </head>
   <body>
-    <a href="/">navbar</a>
+    
+  <div class="top-bar-container" data-sticky-container>
+      <div class="sticky sticky-topbar" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">Weather You'll See Pokemon</li>
+      <li><a href="{{url_for('home')}}">Home</a></li>
+      <li><a href="#">Search by Location</a></li>
+      <li><a href="#">Random Location</a></li>
+      <li><a href="{{url_for('pokedex')}}">Pokedex</a></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+  </div>
+      </div>
+      </div>
     {% block content %}
     CONTENT
     {% endblock %}
