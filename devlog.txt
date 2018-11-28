@@ -69,3 +69,8 @@ ivanZ -- 2018-11-27 13:23
 --------------------------------------------------------------
 Updated navbar with 'Pokedex' tab. Tried to make it sticky, did not work. Will focus on it as an "extra" feature.
 ================================================================
+
+ivanZ -- 2018-11-28 12:45
+--------------------------------------------------------------
+Updated navbar with 'Pokedex' tab with links. Added Search Bar. Will make Search bar align right.
+================================================================
