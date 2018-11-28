@@ -23,6 +23,9 @@ def home():
 
     return render_template("home.html", img = iconUrl,name=dict["name"] , expl = dict["weather"][0]["description"],max =convert(dict["main"]["temp_max"]),min = convert(dict["main"]["temp_min"]),now =convert(dict["main"]["temp"]))
 
+@app.route("/pokedex")
+def pokedex():
+    return render_template("poke_data.html")
 
 
 
