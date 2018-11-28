@@ -10,18 +10,14 @@ import util.api as api
 from flask import Flask, render_template
 
 app = Flask(__name__)
-
-
         
 @app.route("/")
 def home():
-    return render_template("home.html", **api.weather() )
+    return render_template("home.html", **api.weather())
 
-@app.route("/pokedex")
-def pokedex():
-    return render_template("poke_data.html")
-
-
+@app.route("/pokedex",methods=["GET"])
+def pokeinfo():
+    return render_template("poke_data.html", **api.poke(request.form['pokemon']))
 
 if __name__ == "__main__":
 	app.debug = True
