@@ -1,5 +1,25 @@
 {% extends "base.html" %}
-{% block title %}Pokemon{% endblock %}
+{% block title %}{{n}}{% endblock %}
 {% block content %}
-
+<h1> {{n}}</h1>
+<p>
+  Abilities: {% for ability in data['abilities'] %} {{ability['ability']['name'].capitalize()}},{% endfor %}
+  <br>
+  Games: {% for game in data['game_indices'] %} {{game['version']['name'].capitalize()}},{% endfor %}
+  <br>
+  Height: {{data['height']}}
+  <br>
+  Weight: {{data['weight']}}
+  <br>
+  Types:  {% for type in data['types'] %} {{type['type']['name'].capitalize()}},{% endfor %}
+  <br>
+  Stats: {% for stat in data['stats'] %} {{stat['stat']['name'].capitalize()}}: {{stat['base_stat']}} <br> {% endfor %}
+  <br>
+  Moves: {% for move in data['moves'] %} {{move['move']['name'].capitalize()}},{% endfor %}
+  <br>
+  Sprites:
+  {% for sprite in data['sprites'] %}
+  <h3>{{sprite.capitalize()}}</h3>
+   <img src = "{{data['sprites'][sprite]}}" alt = "Does not exist"> {% endfor %}
+  </p>
 {% endblock %}

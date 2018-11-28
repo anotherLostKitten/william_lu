@@ -13,7 +13,7 @@ app = Flask(__name__)
         
 @app.route("/")
 def home():
-    return render_template("home.html", **api.weather('London'))
+    return render_template("home.html", **api.weather('Brooklyn'))
 
 @app.route("/pokedex/")
 def pokedex():
@@ -31,9 +31,9 @@ def pokedex():
 #request.form['pokemon']
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
-    poke_data = api.poke(name)
+    poke_data = api.poke(name.lower())
     
-    return render_template("home.html", **api.weather('London'))
+    return render_template("poke_info.html", data = poke_data, n = name)
 
 
 if __name__ == "__main__":
