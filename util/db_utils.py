@@ -10,11 +10,9 @@ def getType(weather):
     command = "SELECT data.type FROM data WHERE data.weather = \'" + weather + "\'"
     c.execute(command)
     type = c.fetchall()
-    return type
-
-type = getType('rain')
-url2 = urllib.request.Request("https://pokeapi.co/api/v2/type/" + type[0][0], headers={'User-Agent': 'Mozilla/5.0'})
-url2 = urllib.request.urlopen(url2)
-data2 = json.loads(url2.read())
-
-print(data2)
+    
+    url2 = urllib.request.Request("https://pokeapi.co/api/v2/type/" + type[0][0], headers={'User-Agent': 'Mozilla/5.0'})
+    url2 = urllib.request.urlopen(url2)
+    data2 = json.loads(url2.read())
+    
+    return data2

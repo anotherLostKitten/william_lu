@@ -6,6 +6,7 @@ from urllib import request, parse
 import json
 import sqlite3
 import util.api as api
+from util.db_utils import getType
 
 from flask import Flask, render_template
 
@@ -13,7 +14,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("home.html", **api.weather('Brooklyn'))
+    result = getType('rain')
+    return render_template("home.html", **api.weather('Brooklyn'),pokemon=result['pokemon'][0]['pokemon']['name'])
 
 # @app.route("/pokedex/")
 # def pokedex():
