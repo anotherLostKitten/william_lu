@@ -10,29 +10,29 @@ import util.api as api
 from flask import Flask, render_template
 
 app = Flask(__name__)
-        
+
 @app.route("/")
 def home():
     return render_template("home.html", **api.weather('Brooklyn'))
 
-@app.route("/pokedex/")
-def pokedex():
-    p_data = api.poke()
-    new_pokemons = []
-    _c = 0
-    for p in p_data:
-        if(_c > 10):
-            break
-        add_this = api.poke(p['name'])
-        add_this['name'] = add_this['name'].capitalize()
-        new_pokemons.append(add_this)
-        _c += 1
-    return render_template("poke_data.html", pokes = new_pokemons )
+# @app.route("/pokedex/")
+# def pokedex():
+#     p_data = api.poke()
+#     new_pokemons = []
+#     _c = 0
+#     for p in p_data:
+#         if(_c > 20):
+#             break
+#         add_this = api.poke(p['name'])
+#         add_this['name'] = add_this['name'].capitalize()
+#         new_pokemons.append(add_this)
+#         _c += 1
+#     return render_template("poke_data.html", pokes = new_pokemons )
 #request.form['pokemon']
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
     poke_data = api.poke(name.lower())
-    
+
     return render_template("poke_info.html", data = poke_data, n = name)
 
 
