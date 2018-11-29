@@ -7,7 +7,8 @@
     <title>{% block title %}William Lu{% endblock %}</title>
   </head>
   <body>
-    
+      <div id="responsive-menu">
+<div class="top-bar foundation-5-top-bar">
   <div class="top-bar-container" data-sticky-container>
       <div class="sticky sticky-topbar" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
   <div class="top-bar-left">
@@ -16,13 +17,18 @@
       <li><a href="{{url_for('home')}}">Home</a></li>
       <li><a href="#">Search by Location</a></li>
       <li><a href="#">Random Location</a></li>
-      <li><a href="{{url_for('pokedex')}}">Pokedex</a></li>
-    </ul>
   </div>
-  <div class="top-bar-right">
+
   </div>
-      </div>
-      </div>
+
+</div>
+<div class="top-bar-right">
+  <ul class="dropdown menu" data-dropdown-menu>
+  <li><input type="search" placeholder="Search"></li>
+  <li><button type="button" class="button">Search</button></li>
+</ul>
+</div>
+</div>
     {% block content %}
     CONTENT
     {% endblock %}
@@ -30,4 +36,3 @@
     &copy; William Lu
   </body>
 </html>
-  

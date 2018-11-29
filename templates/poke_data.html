@@ -1,18 +1,22 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Pokedex{% endblock %}
 {% block content %}
 
 <div class="grid-container">
   <div class="grid-x grid-padding-x small-up-2 medium-up-3">
+      {% for poke in pokes %}
+
     <div class="cell">
       <div class="card">
-        <img src="assets/img/generic/rectangle-1.jpg">
+        <img src="{{poke['sprites']['front_default']}}" height="300" width="300">
         <div class="card-section">
-        <h4>This is a row of cards.</h4>
-          <p>This row of cards is embedded in an X-Y Block Grid.</p>
+          <h4>{{poke['name']}}</h4>
+	  <a href="{{url_for('pokeinfo', name = poke['name'])}}" class="button expanded primary radius">Learn More</a>
         </div>
       </div>
     </div>
+      {% endfor %}
+
   </div>
 </div>
 {% endblock %}
