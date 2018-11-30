@@ -5,10 +5,11 @@
 from urllib import request, parse
 import json
 import sqlite3
-import util.api as api
-from util.db_utils import getType
 
 from flask import Flask, render_template
+
+import util.api as api
+from util.db_utils import getType
 
 app = Flask(__name__)
 
