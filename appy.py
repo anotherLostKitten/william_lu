@@ -15,8 +15,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    result = getType('rain')
-    return render_template("home.html", **api.weather('Brooklyn'),pokemon=result['pokemon'][0]['pokemon']['name'])
+    return render_template("home.html", **api.weather('Brooklyn'))
 
 # @app.route("/pokedex/")
 # def pokedex():
