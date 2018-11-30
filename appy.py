@@ -39,6 +39,13 @@ def pokeinfo(name):
     return render_template("poke_info.html", data = poke_data, n = name)
 
 
+@app.route("/test/<name>" )
+def pokeinfo_info(name):
+    poke_data = api.poke(name.lower())
+    size = len(poke_data['sprites'])
+
+    return render_template("poke_info_test.html", data = poke_data, num = size, n = name)
+
 if __name__ == "__main__":
 	app.debug = True
 	app.run()

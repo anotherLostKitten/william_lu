@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}{{n}}{% endblock %}
+{% block content %}
+<h1> {{n}}</h1>
+<p>
+  Abilities: {% for ability in data['abilities'] %} {{ability['ability']['name'].capitalize()}},{% endfor %}
+  <br>
+  Games: {% for game in data['game_indices'] %} {{game['version']['name'].capitalize()}},{% endfor %}
+  <br>
+  Height: {{data['height']}}
+  <br>
+  Weight: {{data['weight']}}
+  <br>
+  Types:  {% for type in data['types'] %} {{type['type']['name'].capitalize()}},{% endfor %}
+  <br>
+  Stats: {% for stat in data['stats'] %} {{stat['stat']['name'].capitalize()}}: {{stat['base_stat']}} <br> {% endfor %}
+  <br>
+  Moves: {% for move in data['moves'] %} {{move['move']['name'].capitalize()}},{% endfor %}
+  <br>
+  Sprites:
+  {% for sprite in data['sprites'] %}
+  <h3>{{sprite.capitalize()}}</h3>
+{% endfor %}
+  </p>
+  <div class = "orbit" role = "region" data-orbit data-use-m-u-i = "false">
+
+     <ul class = "orbit-container">
+        <button class = "orbit-previous" aria-label = "previous"><span class = "show-for-sr">Previous Slide</span>◀</button>
+        <button class = "orbit-next" aria-label = "next"><span class = "show-for-sr">Next Slide</span>▶</button>
+        <li class = "orbit-slide">
+           <div>
+
+             <h3>{{sprite.capitalize()}}</h3>
+              <img src = "{{data['sprites'][sprite]}}" alt = "Does not exist">
+           </div>
+        </li>
+
+
+     </ul>
+
+
+     <nav class = "orbit-bullets">
+       {% for n in range(num) %}
+        <button data-slide = "{{n}}">
+           <span class = "show-for-sr">Second slide</span>
+        </button>
+        {% endfor %}
+
+     </nav>
+  </div>
+
+  <script>
+     $(document).ready(function() {
+        $(document).foundation();
+     })
+  </script>
+</body>
+</html>
+{% endblock %}
