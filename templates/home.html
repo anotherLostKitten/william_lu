@@ -10,6 +10,10 @@
 	<p>Temperate Min:{{min}}</p>
 	<p>Temperate Now:{{now}}</p>
         <h1>Weather Data</h1>
-        <p>POKEMON:{{pokemon}} </p>
+	{% for i in pokemon %}
+<p>Random Pokemon:{{i}} </p>
+{% endfor %}
+
+
             <br>
 {% endblock %}
