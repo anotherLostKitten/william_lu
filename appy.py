@@ -6,7 +6,7 @@ from urllib import request, parse
 import json
 import sqlite3
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash, redirect, url_for
 
 import util.api as api
 from util.db_utils import getType
@@ -30,7 +30,7 @@ def home():
 #         new_pokemons.append(add_this)
 #         _c += 1
 #     return render_template("poke_data.html", pokes = new_pokemons )
-#request.form['pokemon']
+# request.form['pokemon']
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
     poke_data = api.poke(name.lower())
@@ -45,6 +45,11 @@ def pokeinfo_info(name):
 
     return render_template("poke_info_test.html", data = poke_data, num = size, n = name)
 
+@app.route("/search", methods=["GET"])
+def search():
+    print(request.args)
+    return redirect("/pokeinfo/"+str(request.args.get("q")))
+    
 if __name__ == "__main__":
 	app.debug = True
 	app.run()

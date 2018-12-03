@@ -114,3 +114,12 @@ ivanZ -- 2018-11-30 13:21
 --------------------------------------------------------------
 Started work so that Info Page is prettier.
 ==============================================================
+
+theodoreP -- 2018-12-03 00:57
+--------------------------------------------------------------
+various:
+	- requirements.txt
+	- basic functional search
+	- minor restructuring
+	- changed "Search" to "Go!", not sure if i should keep this change what do you guys think??
+==============================================================
