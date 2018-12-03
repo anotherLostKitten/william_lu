@@ -12,7 +12,7 @@ To aquire an API key for OpenWeatherAPI, [**one must sign up**](https://home.ope
 
 Then, in `util/apy.py`, change the value of `weatherkey` to your API key.
 
-After cloning, the app needs to be run from a *Python 3* virtual enviornment with *Wheel* and *Flask*. Run these commands in terminal while in the root directory of the cloned repository:
+After cloning, the app needs to be run from a [*Python 3*](https://docs.python.org/3/index.html) virtual enviornment with [*Wheel*](https://wheel.readthedocs.io/en/stable/) and [*Flask*](http://flask.pocoo.org/docs/1.0/). Run these commands in terminal while in the root directory of the cloned repository:
 
 `python3 -m venv h/`
 
