@@ -122,4 +122,6 @@ various:
 	- basic functional search
 	- minor restructuring
 	- changed "Search" to "Go!", not sure if i should keep this change what do you guys think??
+
+also readme uptades like 15 minutes later
 ==============================================================

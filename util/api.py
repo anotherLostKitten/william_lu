@@ -6,12 +6,13 @@ import json
 import sqlite3
 from util.db_utils import getType
 
+weatherkey = "1d18700111907e62e27adc5fa89fad1a"
 
 def convert(temp):
     return round((temp-273.15) * 1.8 + 32)
 
 def weather(city):
-    site= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=1d18700111907e62e27adc5fa89fad1a"
+    site= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + weatherkey
     url = request.urlopen(site)
     dict = json.loads(url.read())
    # print (dict)
