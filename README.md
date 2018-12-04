@@ -10,18 +10,28 @@ The project uses [*OpenWeatherMap API*](https://openweathermap.org/api), which r
 
 To aquire an API key for OpenWeatherAPI, [**one must sign up**](https://home.openweathermap.org/users/sign_up).
 
-Then, in `util/apy.py`, change the value of `weatherkey` to your API key.
+Then, in `util/keys.txt`, paste your key in place of whatever is currently there.
 
 After cloning, the app needs to be run from a [*Python 3*](https://docs.python.org/3/index.html) virtual enviornment with [*Wheel*](https://wheel.readthedocs.io/en/stable/) and [*Flask*](http://flask.pocoo.org/docs/1.0/). Run these commands in terminal while in the root directory of the cloned repository:
 
-`python3 -m venv h/`
+##### First time installation:
 
-`. h/bin/activate`
+```bash
+python3 -m venv h/`
+. h/bin/activate`
+pip install -r requirements.txt`
+deactivate
+```
 
-`pip install -r requirements.txt`
+##### Running the app:
 
-`python appy.py`
+```bash
+. h/bin/activate
+python appy.py
+```
 
 And when done,
 
-`deactivate`
+```bash
+deactivate
+```
