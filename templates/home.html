@@ -1,19 +1,20 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Weather{% endblock %}
 {% block content %}
-        <h1>Weather Data</h1>
-        <p> </p>
-            <br>
-        <img src={{img}}>
-        <p> {{name}}: {{expl}} </p>
-	<p>Temperate Max:{{max}}</p>
-	<p>Temperate Min:{{min}}</p>
-	<p>Temperate Now:{{now}}</p>
-        <h1>Weather Data</h1>
-	{% for i in pokemon %}
-<p>Random Pokemon:{{i}} </p>
-{% endfor %}
 
+  <div class="media-object">
+    <div class="media-object-section">
+      <div class="thumbnail">
+        <img src="http://nintendochitchat.com/wp-content/uploads/2017/03/banner-pokemon.png">
+      </div>
+    </div>
+  </div>
+  <div class="media-object">
+    <div class="media-object-section">
+      <div class="thumbnail">
+        <img src="https://sriramgurujala.com/wp-content/uploads/2017/12/weather-banner-image-11_tcm1059-294281.png">
+      </div>
+    </div>
+  </div>
 
-            <br>
 {% endblock %}

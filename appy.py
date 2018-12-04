@@ -17,6 +17,9 @@ app = Flask(__name__)
 def home():
     return render_template("home.html", **api.weather('Brooklyn'))
 
+@app.route("/wtest")
+def wtest():
+    return render_template("weather.html")
 # @app.route("/pokedex/")
 # def pokedex():
 #     p_data = api.poke()
@@ -35,21 +38,19 @@ def home():
 def pokeinfo(name):
     poke_data = api.poke(name.lower())
 
-    return render_template("poke_info.html", data = poke_data, n = name)
+    return render_template("willaim0.html", data = poke_data, n = name)
 
 
-@app.route("/test/<name>" )
-def pokeinfo_info(name):
-    poke_data = api.poke(name.lower())
-    size = len(poke_data['sprites'])
+@app.route("/test" )
+def pokeinfo_info():
 
-    return render_template("poke_info_test.html", data = poke_data, num = size, n = name)
+    return render_template("willaim.html")
 
 @app.route("/search", methods=["GET"])
 def search():
     print(request.args)
     return redirect("/pokeinfo/"+str(request.args.get("q")))
-    
+
 if __name__ == "__main__":
 	app.debug = True
 	app.run()
