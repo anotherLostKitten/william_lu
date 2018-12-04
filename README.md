@@ -17,9 +17,9 @@ After cloning, the app needs to be run from a [*Python 3*](https://docs.python.o
 ##### First time installation:
 
 ```bash
-python3 -m venv h/`
-. h/bin/activate`
-pip install -r requirements.txt`
+python3 -m venv h/
+. h/bin/activate
+pip install -r requirements.txt
 deactivate
 ```
 
