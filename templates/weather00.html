@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/foundation.css">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/app.css">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/min.css">
+
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.css">
+
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
+    <!--- This is the webpage title --->
+    <title>Weather</title>
+  </head>
+  <body style = "font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;">
+    <div id="responsive-menu">
+      <div class="top-bar foundation-5-top-bar">
+  <div class="top-bar-container">
+
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+    <li class="menu-text">Weather You'll See Pokemon</li>
+    <li><a href="{{url_for('home')}}">Home</a></li>
+    <li><a href="#">Search by Location</a></li>
+    <li><a href="#">Random Location</a></li>
+        </ul>
+      </div>
+
+  </div>
+  <div class="top-bar-right">
+    <form action="/search" method="GET">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li><input type="text" name="q" placeholder="Search"></li>
+        <li><button type="submit" class="button">Go!</button></li>
+      </ul>
+    </form>
+  </div>
+      </div>
+    </div>
+
+    <br> 
+
+<div class="grid-container" style="margin-left: 100px; margin-right: 100px; border-radius: 10px; border: 5px solid blue;">
+	<div lass="grid-x grid-padding-x" style="background-color: white; border-radius: 10px;">
+		<div class="cell"> <center> <h1> England is my City </h1> </center> </div>
+		<div class="cell"> <center> <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"> </center> </div>		
+		<div class="cell"><h3> Weather Related Stuff </h3>
+		<div class="cell">Data1</div>
+		<div class="cell">Data2</div>
+		<div class="cell" style="background-color: blue"><h5>Type: Water</h5></div>
+
+	</div>
+
+  <div class="grid-x grid-padding-x small-up-3 medium-up-3">
+
+    <div class="cell">
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
+        <div class="card-section">
+        <h4>This is a cards.</h4>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
+        <div class="card-section">
+          <h4>This is a card.</h4>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
+        <div class="card-section">
+          <h4>This is a card.</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
+        <div class="card-section">
+        <h4>This is a cards.</h4>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width ="100%" >
+        <div class="card-section">
+          <h4>This is a card.</h4>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
+        <div class="card-section">
+          <h4>This is a card.</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+    &copy; William Lu
+    <script>
+      $(document).foundation()
+    </script>
+  </body>
+</html>
