@@ -15,9 +15,28 @@ app = Flask(__name__)
 
 app.secret_key = urandom(32)
 
+colors = {'bug':('#3c9950','#1c4b27'),
+          'dark':('#040707','#595978'),
+          'dragon':('#448a95','#62cad9'),
+          'electric':('#e2e32b','#fafa72'),
+          'fairy':('#961a45','#e91368'),
+          'fighting':('#ef6239','#994025'),
+          'fire':('#fd4b5a','#ab1f24'),
+          'flying':('#94b2c7','#4a677d'),
+          'ghost':('#4a677d','#33336b'),
+          'grass':('#27cb50','#147b3d'),
+          'ground':('#a8702d','#6e491f'),
+          'ice':('#d8f0fa','#86d2f5'),
+          'normal':('#ca98a6','#75525c'),
+          'poison':('#9b69da','#5e2d89'),
+          'psychic':('#f77abd','#a52a6c'),
+          'rock':('#8b4c35','#48190b'),
+          'steel':('#82bda9','#60756e'),
+          'water':('#8faffb','#144bc6')}
+
 @app.route("/")
 def home():
-    return render_template("home.html", **api.weather('Brooklyn'))
+    return render_template("home.html")
 
 @app.route("/wtest")
 def wtest():
@@ -51,12 +70,13 @@ def pokeinfo_info():
 @app.route("/search", methods=["GET"])
 def search():
     q = str(request.args.get("q")).lower()
-    chck = get_cache(q)
-    if chck != None:
-        return redirect("/pokeinfo/"+q)
-    chck = api.weather(q)
-    if chck != None:
-        return redirect("/wtest")
+    if len(q) > 0:
+        chck = get_cache(q)
+        if chck != None:
+            return redirect("/pokeinfo/"+q)
+        chck = api.weather(q)
+        if chck != None:
+            return redirect("/wtest")
     return redirect("/")
 #   print(request.args)
 #   return redirect("/pokeinfo/"+str(request.args.get("q")))

@@ -105,11 +105,6 @@ ivanZ -- 2018-11-28 17:00
 Info Page for Pokemon.
 ==============================================================
 
-adilG -- 2018-12-03 13:15
---------------------------------------------------------------
-Error handling for unrecognized API calls
-===============================================================
-
 ivanZ -- 2018-11-29 13:00
 --------------------------------------------------------------
 Fixed nav bar so that Search bar is right aligned
@@ -133,7 +128,12 @@ also readme uptades like 15 minutes later
 
 adilG -- 2018-12-03 13:10
 --------------------------------------------------------------
-Page noe displays random pokemons based on weather in the area.
+Page now displays random pokemons based on weather in the area.
+===============================================================
+
+imadB -- 2018-12-03 13:15
+--------------------------------------------------------------
+Getting and displaying images of pokemon from API based on weather and type
 ===============================================================
 
 adilG -- 2018-12-04 13:15
@@ -151,4 +151,8 @@ TODO: error handling for if cookie/api data is large not good, redirect to last 
 
 ===============================================================
 
+Theodoroe Peters -- 2018-12-05 11:01
+--------------------------------------------------------------
+color list and uhhhh empty searches don't make errors
+===============================================================
 
