@@ -151,4 +151,8 @@ TODO: error handling for if cookie/api data is large not good, redirect to last 
 
 ===============================================================
 
+Theodoroe Peters -- 2018-12-05 11:01
+--------------------------------------------------------------
+color list and uhhhh empty searches don't make errors
+===============================================================
 
