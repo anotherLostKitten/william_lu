@@ -16,24 +16,24 @@ app = Flask(__name__)
 
 app.secret_key = urandom(32)
 
-colors = {'bug':(0x3c9950,0x1c4b27),
-          'dark':(0x040707,0x595978),
-          'dragon':(0x448a95,0x62cad9),
-          'electric':(0xe2e32b,0xfafa72),
-          'fairy':(0x961a45,0xe91368),
-          'fighting':(0xef6239,0x994025),
-          'fire':(0xfd4b5a,0xab1f24),
-          'flying':(0x94b2c7,0x4a677d),
-          'ghost':(0x4a677d,0x33336b),
-          'grass':(0x27cb50,0x147b3d),
-          'ground':(0xa8702d,0x6e491f),
-          'ice':(0xd8f0fa,0x86d2f5),
-          'normal':(0xca98a6,0x75525c),
-          'poison':(0x9b69da,0x5e2d89),
-          'psychic':(0xf77abd,0xa52a6c),
-          'rock':(0x8b4c35,0x48190b),
-          'steel':(0x82bda9,0x60756e),
-          'water':(0x8faffb,0x144bc6)}
+colors = {'bug':('#3c9950','#1c4b27'),
+          'dark':('#040707','#595978'),
+          'dragon':('#448a95','#62cad9'),
+          'electric':('#e2e32b','#fafa72'),
+          'fairy':('#961a45','#e91368'),
+          'fighting':('#ef6239','#994025'),
+          'fire':('#fd4b5a','#ab1f24'),
+          'flying':('#94b2c7','#4a677d'),
+          'ghost':('#4a677d','#33336b'),
+          'grass':('#27cb50','#147b3d'),
+          'ground':('#a8702d','#6e491f'),
+          'ice':('#d8f0fa','#86d2f5'),
+          'normal':('#ca98a6','#75525c'),
+          'poison':('#9b69da','#5e2d89'),
+          'psychic':('#f77abd','#a52a6c'),
+          'rock':('#8b4c35','#48190b'),
+          'steel':('#82bda9','#60756e'),
+          'water':('#8faffb','#144bc6')}
 
 @app.route("/")
 def home():
