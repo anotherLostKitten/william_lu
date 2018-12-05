@@ -4,16 +4,16 @@
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/foundation.css">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/app.css">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/min.css">
-    
+
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.css">
 
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/js/vendor/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/js/foundation.min.js"></script>
     <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
     <!--- This is the webpage title --->
     <title>{% block title %}William Lu{% endblock %}</title>
   </head>
-  <body>
+  <body style = "font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;">
     <div id="responsive-menu">
       <div class="top-bar foundation-5-top-bar">
 	<div class="top-bar-container">
@@ -26,7 +26,7 @@
 		<li><a href="#">Random Location</a></li>
 	      </ul>
 	    </div>
-	    	  
+
 	</div>
 	<div class="top-bar-right">
 	  <form action="/search" method="GET">
@@ -42,7 +42,7 @@
     CONTENT
     {% endblock %}
 
-    &copy; William Lu
+    <div style="text-align:right"> &copy; William Lu </div>
     <script>
       $(document).foundation()
     </script>

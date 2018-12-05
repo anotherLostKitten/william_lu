@@ -6,7 +6,6 @@ from urllib import request, parse
 import json
 import sqlite3
 from os import urandom
-
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 
 import util.api as api
@@ -41,7 +40,7 @@ def wtest():
 def pokeinfo(name):
     poke_data = get_cache(name.lower())
 
-    return render_template("willaim0.html", data = poke_data, n = name.lower())
+    return render_template("willaim00.html", data = poke_data, n = name.lower())
 
 
 @app.route("/test" )
@@ -67,11 +66,11 @@ def add_cache(pokes):
     for i in pokes:
         if i["name"].lower() not in session:
             session[i["name"].lower()] = i
-            
+
 def clear_cache():
     '''clears cookies'''
     session.clear()
-    
+
 def get_cache(poke):
     poke = poke.lower()
     '''if a pokemon desn't exists in cookies, adds to cookies. regardless, returns pokemon data.'''
