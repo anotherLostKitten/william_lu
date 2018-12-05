@@ -104,6 +104,7 @@ ivanZ -- 2018-11-28 17:00
 --------------------------------------------------------------
 Info Page for Pokemon.
 ==============================================================
+
 adilG -- 2018-12-03 13:15
 --------------------------------------------------------------
 Error handling for unrecognized API calls
@@ -139,3 +140,15 @@ adilG -- 2018-12-04 13:15
 --------------------------------------------------------------
 Error handling for unrecognized API calls.
 ===============================================================
+
+theodorePP -- 2018-12-04 22:50
+--------------------------------------------------------------
+Error handling for ALL unrecognized API calls.
+Caching of API results for faster load times.
+Search Function cabable of differentiating different types of input.
+
+TODO: error handling for if cookie/api data is large not good, redirect to last page instead of home page on bad search
+
+===============================================================
+
+
