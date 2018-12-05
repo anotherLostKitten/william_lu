@@ -59,7 +59,7 @@ def wtest():
 def pokeinfo(name):
     poke_data = get_cache(name.lower())
 
-    return render_template("willaim00.html", data = poke_data, n = name.lower())
+    return render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors)
 
 
 @app.route("/test" )

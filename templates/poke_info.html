@@ -1,25 +1,86 @@
 {% extends "base.html" %}
-{% block title %}{{n}}{% endblock %}
+{% block title %}{{n.capitalize()}}{% endblock %}
 {% block content %}
-<h1> {{n}}</h1>
-<p>
-  Abilities: {% for ability in data['abilities'] %} {{ability['ability']['name'].capitalize()}},{% endfor %}
-  <br>
-  Games: {% for game in data['game_indices'] %} {{game['version']['name'].capitalize()}},{% endfor %}
-  <br>
-  Height: {{data['height']}}
-  <br>
-  Weight: {{data['weight']}}
-  <br>
-  Types:  {% for type in data['types'] %} {{type['type']['name'].capitalize()}},{% endfor %}
-  <br>
-  Stats: {% for stat in data['stats'] %} {{stat['stat']['name'].capitalize()}}: {{stat['base_stat']}} <br> {% endfor %}
-  <br>
-  Moves: {% for move in data['moves'] %} {{move['move']['name'].capitalize()}},{% endfor %}
-  <br>
-  Sprites:
-  {% for sprite in data['sprites'] %}
-  <h3>{{sprite.capitalize()}}</h3>
-   <img src = "{{data['sprites'][sprite]}}" alt = "Does not exist"> {% endfor %}
-  </p>
+<br>
+	<div class="grid-container" style="margin-left: 300px; margin-right: 300px; border-radius: 10px; background-color: {{colors[data['types'][0]['type']['name']][0]}}; border: 15px solid {{colors[data['types'][0]['type']['name']][1]}};">
+		<div class="grid-x" style="border-radius: 10px;">
+		  <div class="cell medium-6 large-6">
+		      <img src= "{{data['sprites']['front_default']}}" width="100%">
+		  </div>
+		  <div class="cell medium-6 large-6">
+		    <div class="grid-y">
+		      <div class="cell"><h3>{{n.capitalize()}}</h3></div>
+					<div class="grid-x grid-margin-x">
+					  {% for type in data['types'] %}
+							<div class="cell medium-{{(12/(data['types']|length))|int }} large-{{(12/(data['types']|length))|int }}" style="background-color: {{colors[type['type']['name']] [0]}}; border-radius: 5px; border: 1px solid black;">{{type['type']['name'].capitalize()}}</div>
+							{% endfor %}
+							<div class="cell"></div>
+
+
+						<div class="cell medium-6 large-6">
+						  Height: {{data['height']}}
+						</div>
+						<div class="cell medium-6 large-6">
+						  Weight: {{data['weight']}}
+						</div>
+						<div class="cell"></div>
+						{% for stat in data['stats'][::-1] %}
+							<div class="cell medium-4 large-4">{{stat['stat']['name'].capitalize()}}: {{stat['base_stat']}}</div>
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+
+			<div class = "cell" style="">
+				<ul class="accordion" data-accordion data-allow-all-closed="true">
+					<li class="accordion-item" data-accordion-item>
+						<a href="#" class="accordion-title" style="color:black"><h10>Abilities</h10></a>
+						<div class="accordion-content" data-tab-content>
+							<div class="grid-x">
+								{% for ability in data['abilities'] %}
+								<div class="cell medium-3 large-3">{{ability['ability']['name'].capitalize()}}</div>
+								{% endfor %}
+							</div>
+
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class = "cell" style="">
+				<ul class="accordion" data-accordion data-allow-all-closed="true">
+					<li class="accordion-item" data-accordion-item>
+						<a href="#" class="accordion-title" style="color:black"><h10>Moves</h10></a>
+						<div class="accordion-content" data-tab-content>
+							<div class="grid-x">
+								{% for move in data['moves'] %}
+								<div class="cell medium-3 large-3">{{move['move']['name'].capitalize()}}</div>
+								{% endfor %}
+							</div>
+
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class = "cell" style="">
+				<ul class="accordion" data-accordion data-allow-all-closed="true">
+					<li class="accordion-item" data-accordion-item>
+						<a href="#" class="accordion-title" style="color:black"><h10>Games</h10></a>
+						<div class="accordion-content" data-tab-content>
+							<div class="grid-x">
+								{% for game in data['game_indices'][::-1] %}
+								<div class="cell medium-3 large-3">{{game['version']['name'].capitalize()}}</div>
+								{% endfor %}
+							</div>
+
+						</div>
+					</li>
+				</ul>
+			</div>
+
+
+		</div>
+	</div>
 {% endblock %}
