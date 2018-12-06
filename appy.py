@@ -11,6 +11,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 
 import util.api as api
 from util.db_utils import getType
+from util.cap import capitalize
 
 app = Flask(__name__)
 
@@ -46,6 +47,10 @@ def wtest():
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
     poke_data = get_cache(name.lower())
+    for move in poke_data['moves']:
+        move['move']['name']=capitalize(move['move']['name'])
+    for ability in poke_data['abilities']:
+        ability['ability']['name']=capitalize(ability['ability']['name'])
     if poke_data != None:
         return render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = set_last_poke(name))
     flash("Pokemon does not exist.")
