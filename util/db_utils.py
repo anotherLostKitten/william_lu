@@ -10,10 +10,15 @@ def getType(weather):
     db.text_factory = str
     command = "SELECT data.type FROM data WHERE data.weather = \'" + weather + "\'"
     c.execute(command)
-    ptype = c.fetchall()
-    #print(ptype)
-    url2 = urllib.request.Request("https://pokeapi.co/api/v2/type/" + ptype[0][0], headers={'User-Agent': 'Mozilla/5.0'})
-    url2 = urllib.request.urlopen(url2)
-    data2 = json.loads(url2.read())
-    
-    return data2
+    ptype = c.fetchall()[0][0].split(",")
+    pokemon = []
+
+    for type in ptype:
+        url = urllib.request.Request("https://pokeapi.co/api/v2/type/" + type, headers={'User-Agent': 'Mozilla/5.0'})
+        url = urllib.request.urlopen(url)
+        data = json.loads(url.read())
+        data = data['pokemon']
+        for poke in data:
+            pokemon.append(poke['pokemon'])
+
+    return pokemon
