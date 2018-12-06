@@ -1,76 +1,32 @@
 {% extends "base.html" %}
-{% block title %}{{n.capitalize()}}{% endblock %}
+{% block title %}{{name}}{% endblock %}
 {% block content %}
 
-<div class="grid-container" style="margin-left: 100px; margin-right: 100px; border-radius: 10px; border: 5px solid blue;">
+<div class="grid-container" style="border-radius: 10px; border: 5px solid black;">
 	<div lass="grid-x grid-padding-x" style="background-color: white; border-radius: 10px;">
-		<div class="cell"> <center> <h1> England is my City </h1> </center> </div>
-		<div class="cell"> <center> <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"> </center> </div>
-		<div class="cell"><h3> Weather Related Stuff </h3>
-		<div class="cell">Data1</div>
-		<div class="cell">Data2</div>
+		<div class="cell"> <center> <h1>{{name}}</h1> </center> </div>
+		<div class="cell"> <center> <img src="{{img}}"> </center> </div>
+		<div class="cell"><h3>   </h3></div>
+		<div class="cell">{{expl.capitalize()}}. <img src="{{img}}"></div>
+		<div class="cell">Temperature: {{min}}F to {{max}}F</div>
+    <div class="cell">Temperature Now: {{now}}F</div>
 		<div class="cell" style="background-color: blue"><h5>Type: Water</h5></div>
 
 	</div>
 
   <div class="grid-x grid-padding-x small-up-3 medium-up-3">
-
-    <div class="cell">
+    {% for p in pokemon %}
+    <div class="cell" style="background=color: red;">
       <div class="card">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
+        <img src="{{p['sprites']['front_default']}}" width="100%">
         <div class="card-section">
-        <h4>This is a cards.</h4>
+        <h4>{{p['name'].capitalize()}}</h4>
         </div>
       </div>
     </div>
-    <div class="cell">
-      <div class="card">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
-        <div class="card-section">
-          <h4>This is a card.</h4>
-        </div>
-      </div>
-    </div>
-    <div class="cell">
-      <div class="card">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
-        <div class="card-section">
-          <h4>This is a card.</h4>
-        </div>
-      </div>
-    </div>
-
-    <div class="cell">
-      <div class="card">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
-        <div class="card-section">
-        <h4>This is a cards.</h4>
-        </div>
-      </div>
-    </div>
-    <div class="cell">
-      <div class="card">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width ="100%" >
-        <div class="card-section">
-          <h4>This is a card.</h4>
-        </div>
-      </div>
-    </div>
-    <div class="cell">
-      <div class="card">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="100%">
-        <div class="card-section">
-          <h4>This is a card.</h4>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 
 </div>
 
-    &copy; William Lu
-    <script>
-      $(document).foundation()
-    </script>
-  </body>
-</html>
+{% endblock %}

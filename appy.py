@@ -41,7 +41,7 @@ def home():
 
 @app.route("/wtest")
 def wtest():
-    return render_template("weather00.html", last_loc = get_last_loc(), last_poke = get_last_poke())
+    return render_template("weather00.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **api.weather('Brooklyn'))
 
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
@@ -50,11 +50,6 @@ def pokeinfo(name):
         return render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = set_last_poke(name))
     flash("Pokemon does not exist.")
     return redirect("/")
-
-@app.route("/test" )
-def pokeinfo_info():
-
-    return render_template("willaim.html", last_loc = get_last_loc(), last_poke = get_last_poke())
 
 @app.route("/search", methods=["GET"])
 def search():
@@ -111,7 +106,7 @@ def set_last_loc(loc):
     tmp = get_last_loc()
     session["last_loc"] = loc.lower()
     return tmp
-    
+
 if __name__ == "__main__":
 	app.debug = True
 	app.run()

@@ -29,8 +29,6 @@ def weather(city):
         input = dict['weather'][0]['main']
         result = getType(input.lower())
         pokemons = [poke(i['pokemon']['name']) for i in sample(result['pokemon'],9)]
-        #print("Pokemons[0]:",pokemons[0])
-        #print("Pokemon list",pokemons)
         content = {'img':iconUrl,'name':dict["name"],'expl':dict["weather"][0]["description"],'max' : convert(dict["main"]["temp_max"]),'min': convert(dict["main"]["temp_min"]),'now' : convert(dict["main"]["temp"]),'pokemon': pokemons}
         return content
     except HTTPError:
@@ -42,7 +40,7 @@ def poke(poke = ''):
         url = "https://pokeapi.co/api/v2/pokemon/"
         url = url + poke
         cri = request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        stuff = request.urlopen(cri) # GETS STUFF 
+        stuff = request.urlopen(cri) # GETS STUFF
         js = stuff.read() # gets info from urlopen
         jason = json.loads(js)
         if(poke == ''):
@@ -50,4 +48,3 @@ def poke(poke = ''):
         return jason
     except HTTPError:
         return None
-            
