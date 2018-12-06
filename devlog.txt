@@ -151,8 +151,18 @@ TODO: error handling for if cookie/api data is large not good, redirect to last 
 
 ===============================================================
 
-Theodoroe Peters -- 2018-12-05 11:01
+theodoroeP -- 2018-12-05 11:01
 --------------------------------------------------------------
 color list and uhhhh empty searches don't make errors
+===============================================================
+
+theodorkP -- 2018-12-06 00:08
+--------------------------------------------------------------
+images for things
+restructured home page and nav bar
+flashed messages for bad search
+last location and last pokemon access stored to cookies,
+show up on nav bar.
+probably other stuff too but i forget
 ===============================================================
 

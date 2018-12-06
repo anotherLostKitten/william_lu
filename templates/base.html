@@ -14,35 +14,58 @@
     <title>{% block title %}William Lu{% endblock %}</title>
   </head>
   <body style = "font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;">
+	<!-- Navbar -->
     <div id="responsive-menu">
       <div class="top-bar foundation-5-top-bar">
-	<div class="top-bar-container">
+		<div class="top-bar-container">
 
-	    <div class="top-bar-left">
-	      <ul class="dropdown menu" data-dropdown-menu>
-		<li class="menu-text">Weather You'll See Pokemon</li>
-		<li><a href="{{url_for('home')}}">Home</a></li>
-		<li><a href="#">Search by Location</a></li>
-		<li><a href="#">Random Location</a></li>
-	      </ul>
-	    </div>
+	      <div class="top-bar-left">
+			<ul class="dropdown menu" data-dropdown-menu>
+			  <li class="menu-text">Weather You'll See Pokemon</li>
+			  <li><a href="/">Home</a></li>
+			  {% if last_loc != None %}
+			  <li><a href="/wtest">{{ last_loc }}</a></li>
+			  {% endif %}
+			  {% if last_poke != None %}
+			  <li><a href="/pokeinfo/{{ last_poke }}"></a>{{ last_poke }}</li>
+			  {% endif %}
+			</ul>
+	      </div>
 
-	</div>
-	<div class="top-bar-right">
-	  <form action="/search" method="GET">
-	    <ul class="dropdown menu" data-dropdown-menu>
-	      <li><input type="text" name="q" placeholder="Search"></li>
-	      <li><button type="submit" class="button">Go!</button></li>
-	    </ul>
-	  </form>
-	</div>
+		  <!-- search -->
+		</div>
+		<div class="top-bar-right">
+		  <form action="/search" method="GET">
+			<ul class="dropdown menu" data-dropdown-menu>
+			  <li><input type="text" name="q" placeholder="Search"></li>
+			  <li><button type="submit" class="button">Go!</button></li>
+			  <li><a href="/random" class="button">???</a></li>
+			</ul>
+		  </form>
+		</div>
       </div>
     </div>
-    {% block content %}
-    CONTENT
-    {% endblock %}
+	<br>
 
-    <div style="text-align:right"> &copy; William Lu </div>
+	<div class="grid-x grid-padding-x">
+	  <div class="cell small-0 medium-1 large-1"></div>
+	  <div class="cell auto">
+		<!-- flashed messages -->
+		{% for i in get_flashed_messages() %}
+		<div class="callout alert float-center">
+		  <strong class="float-center" style="text-align:center;">{{ i }}</strong>
+		</div>
+		{% endfor %}
+		
+		{% block content %}
+		CONTENT
+		{% endblock %}
+
+		<div style="text-align:right"> &copy; William Lu </div>
+	  </div>
+	  <div class="cell small-0 medium-1 large-1"></div>
+	</div>
+	
     <script>
       $(document).foundation()
     </script>

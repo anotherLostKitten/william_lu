@@ -2,19 +2,17 @@
 {% block title %}William Lu Says Hi{% endblock %}
 {% block content %}
 
-  <div class="media-object">
-    <div class="media-object-section">
-      <div class="thumbnail">
-        <img src="http://nintendochitchat.com/wp-content/uploads/2017/03/banner-pokemon.png">
-      </div>
-    </div>
+<form action="/search" method="GET" class="float-center">
+  <div class="grid-x grid-padding-x">
+	<div class="cell small-4 medium-4 large-4 float-center" style="text-align:center;">
+	  <img src="static/pokeweather.png"/>
+	  <i style="text-align:center;" class="float-center">Weather You'll See Pokemon</i>
+	  <br>
+	  <input type="text" name="q" placeholder="Search for a Pokemon or place." class="float-center" width="20px">
+	  <button type="submit" class="button float-center">Go!</button>
+	</div>
   </div>
-  <div class="media-object">
-    <div class="media-object-section">
-      <div class="thumbnail">
-        <img src="https://sriramgurujala.com/wp-content/uploads/2017/12/weather-banner-image-11_tcm1059-294281.png">
-      </div>
-    </div>
-  </div>
+</form>
+
 
 {% endblock %}

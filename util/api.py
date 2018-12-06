@@ -5,6 +5,7 @@ from urllib.error import HTTPError
 from random import sample
 import json
 import sqlite3
+
 from util.db_utils import getType
 
 def getkey(keyfile):
@@ -28,7 +29,7 @@ def weather(city):
         input = dict['weather'][0]['main']
         result = getType(input.lower())
         pokemons = [poke(i['pokemon']['name']) for i in sample(result['pokemon'],9)]
-        print("Pokemons[0]:",pokemons[0])
+        #print("Pokemons[0]:",pokemons[0])
         #print("Pokemon list",pokemons)
         content = {'img':iconUrl,'name':dict["name"],'expl':dict["weather"][0]["description"],'max' : convert(dict["main"]["temp_max"]),'min': convert(dict["main"]["temp_min"]),'now' : convert(dict["main"]["temp"]),'pokemon': pokemons}
         return content

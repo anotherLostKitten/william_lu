@@ -6,6 +6,7 @@ from urllib import request, parse
 import json
 import sqlite3
 from os import urandom
+
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 
 import util.api as api
@@ -18,7 +19,7 @@ app.secret_key = urandom(32)
 colors = {'bug':('#3c9950','#1c4b27'),
           'dark':('#040707','#595978'),
           'dragon':('#448a95','#62cad9'),
-          'electric':('#e2e32b','#fafa72'),
+          'electric':('#fafa72','#e2e32b'),
           'fairy':('#961a45','#e91368'),
           'fighting':('#ef6239','#994025'),
           'fire':('#fd4b5a','#ab1f24'),
@@ -36,50 +37,41 @@ colors = {'bug':('#3c9950','#1c4b27'),
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", last_loc = get_last_loc(), last_poke = get_last_poke())
 
 @app.route("/wtest")
 def wtest():
-    return render_template("weather.html")
-# @app.route("/pokedex/")
-# def pokedex():
-#     p_data = api.poke()
-#     new_pokemons = []
-#     _c = 0
-#     for p in p_data:
-#         if(_c > 20):
-#             break
-#         add_this = api.poke(p['name'])
-#         add_this['name'] = add_this['name'].capitalize()
-#         new_pokemons.append(add_this)
-#         _c += 1
-#     return render_template("poke_data.html", pokes = new_pokemons )
-# request.form['pokemon']
+    return render_template("weather00.html", last_loc = get_last_loc(), last_poke = get_last_poke())
+
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
     poke_data = get_cache(name.lower())
-
-    return render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors)
-
+    if poke_data != None:
+        return render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = set_last_poke(name))
+    flash("Pokemon does not exist.")
+    return redirect("/")
 
 @app.route("/test" )
 def pokeinfo_info():
 
-    return render_template("willaim.html")
+    return render_template("willaim.html", last_loc = get_last_loc(), last_poke = get_last_poke())
 
 @app.route("/search", methods=["GET"])
 def search():
-    q = str(request.args.get("q")).lower()
-    if len(q) > 0:
+    q = str(request.args.get('q')).lower()
+    if len(q) > 0 and 'q' in request.args:
         chck = get_cache(q)
         if chck != None:
             return redirect("/pokeinfo/"+q)
         chck = api.weather(q)
         if chck != None:
             return redirect("/wtest")
+    flash("Bad search query.")
     return redirect("/")
-#   print(request.args)
-#   return redirect("/pokeinfo/"+str(request.args.get("q")))
+
+@app.route("/random")
+def randloc():
+    pass
 
 def add_cache(pokes):
     '''stores each pokemon in a list to cookies'''
@@ -92,8 +84,8 @@ def clear_cache():
     session.clear()
 
 def get_cache(poke):
-    poke = poke.lower()
     '''if a pokemon desn't exists in cookies, adds to cookies. regardless, returns pokemon data.'''
+    poke = poke.lower()
     if poke not in session:
         d = api.poke(poke)
         print(d)
@@ -102,6 +94,24 @@ def get_cache(poke):
         return d
     return session[poke]
 
+def get_last_poke():
+    if "last_poke" in session:
+        return session["last_poke"]
+    return None
+def set_last_poke(poke):
+    tmp = get_last_poke()
+    session["last_poke"] = poke.lower()
+    return tmp
+
+def get_last_loc():
+    if "last_loc" in session:
+        return session["last_loc"]
+    return None
+def set_last_loc(loc):
+    tmp = get_last_loc()
+    session["last_loc"] = loc.lower()
+    return tmp
+    
 if __name__ == "__main__":
 	app.debug = True
 	app.run()
