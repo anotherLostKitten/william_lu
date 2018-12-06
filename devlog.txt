@@ -166,3 +166,9 @@ show up on nav bar.
 probably other stuff too but i forget
 ===============================================================
 
+imadB -- 2018-12-06 13:15
+--------------------------------------------------------------
+Multiple pokemon types returned based on weather conditions
+==============================================================
+
+
