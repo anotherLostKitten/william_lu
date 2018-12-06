@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block title %}{{n.capitalize()}}{% endblock %}
 {% block content %}
+
 <br>
-	<div class="grid-container" style="margin-left: 300px; margin-right: 300px; border-radius: 10px; background-color: {{colors[data['types'][0]['type']['name']][0]}}; border: 15px solid {{colors[data['types'][0]['type']['name']][1]}};">
+	<div class="grid-container" style="border-radius: 10px; background-color: {{colors[data['types'][0]['type']['name']][0]}}; border: 15px solid {{colors[data['types'][0]['type']['name']][1]}};">
 		<div class="grid-x" style="border-radius: 10px;">
 		  <div class="cell medium-6 large-6">
 		      <img src= "{{data['sprites']['front_default']}}" width="100%">
