@@ -40,9 +40,25 @@ colors = {'bug':('#3c9950','#1c4b27'),
 def home():
     return render_template("home.html", last_loc = get_last_loc(), last_poke = get_last_poke())
 
-@app.route("/wtest")
-def wtest():
-    return render_template("weather00.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **api.weather('Brooklyn'))
+@app.route("/weather")
+def weather():
+    weather_stuff = api.weather('Brooklyn')
+    reduced_types = set()
+    all_types = weather_stuff['pokemon'][0]['types']
+    for t in all_types:
+        reduced_types.add(t['type']['name'])
+    rest = len(reduced_types)
+    res = 4
+
+    if(rest > 5 and rest%3 == 0):
+        res = 3
+    elif(rest < 2):
+        res = 1
+    elif(rest < 4):
+        res = 2
+    print(res)
+
+    return render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res)
 
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
@@ -65,7 +81,7 @@ def search():
             return redirect("/pokeinfo/"+q)
         chck = api.weather(q)
         if chck != None:
-            return redirect("/wtest")
+            return redirect("/weather")
     flash("Bad search query.")
     return redirect("/")
 
