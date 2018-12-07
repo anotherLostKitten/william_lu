@@ -20,7 +20,7 @@ colors = {'bug':('#3c9950','#1c4b27'),
           'dragon':('#448a95','#62cad9'),
           'electric':('#fafa72','#e2e32b'),
           'fairy':('#961a45','#e91368'),
-          'fighting':('#ef6239','#994025'),
+          'fighting':('#994025','#ef6239'),
           'fire':('#fd4b5a','#ab1f24'),
           'flying':('#94b2c7','#4a677d'),
           'ghost':('#4a677d','#33336b'),
@@ -76,6 +76,8 @@ def pokeinfo(name):
 @app.route("/search", methods=["GET"])
 def search():
     q = str(request.args.get('q')).lower()
+    if q == "william lu":
+        return redirect("/williamlu")
     if len(q) > 0 and 'q' in request.args:
         chck = api.poke(q)
         if chck != None:
@@ -114,6 +116,11 @@ def randloc():
         return render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, mapurl = map_stuff, capitalize = capitalize)
     flash("Could not get data on random location.")
     return redirect("/")    
+
+@app.route("/williamlu")
+def williamlu():
+    return render_template("william_lu.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize)
+
 def capitalize(move):
     seperate = move.split(" ")
     result = ""

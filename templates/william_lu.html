@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}William Lu Himself{% endblock %}
+{% block content %}
+
+<br>
+<div class="grid-container" style="border-radius: 15px; border: 10px solid {{colors['fighting'][0]}};">
+  <div class="grid-x" style="border-radius: 10px;">
+	<div class="cell medium-6 large-5">
+	  <img src= "{{url_for('static',filename='wlupokemon.png')}}" width="100%">
+	</div>
+	<div class="cell medium-6 large-7">
+	  <div class="grid-y">
+		<div class="cell" style="text-align:center;"><br><h3>William Lu</h3><hr></div>
+		<div class="cell">
+		  <div class="grid-x grid-margin-x">
+			<div class="cell auto" style="background-color: {{colors['fighting'] [1]}}; border-radius: 5px; border: 3px solid {{colors['fighting'] [0]}};text-align:center;">Dabbing on the Haters</div>
+			
+		  </div>
+		</div>
+		<div class="cell"><br></div>
+		<div class="grid-x grid-margin-x">
+
+		  <div class="cell medium-6 large-6">
+			Height: 6
+		  </div>
+		  <div class="cell medium-6 large-6">
+			Weight: 150
+		  </div>
+		  <div class="cell"><br></div>
+		  <div class="cell medium-4 large-4">Charisma: 100</div>
+		  <div class="cell medium-4 large-4">Tenacity: 100</div>
+		  <div class="cell medium-4 large-4">Bravery: 100</div>
+		  <div class="cell medium-4 large-4">Scholarly Disposition: 100</div>
+		  <div class="cell medium-8 large-8">Regular Attendance of the Computer Interaction Club: 0</div>
+
+		</div>
+	  </div>
+	</div>
+
+	<div class = "cell" style="">
+	  <ul class="accordion" data-accordion data-allow-all-closed="true">
+		<li class="accordion-item" data-accordion-item>
+		  <a href="#" class="accordion-title" style="color:black"><h10>Abilities</h10></a>
+		  <div class="accordion-content" data-tab-content>
+			<div class="grid-x">
+			  <div class="cell">Bringing Subway Sandwiches into the CS Room</div>
+			  <div class="cell">Creating Fine Art Out of Foam Board</div>
+			</div>
+
+		  </div>
+		</li>
+	  </ul>
+	</div>
+
+	<div class = "cell" style="">
+	  <ul class="accordion" data-accordion data-allow-all-closed="true">
+		<li class="accordion-item" data-accordion-item>
+		  <a href="#" class="accordion-title" style="color:black"><h10>Moves</h10></a>
+		  <div class="accordion-content" data-tab-content>
+			<div class="grid-x">
+			  <div class="cell">I'm too tired to type all of these imagine a bunch of dance moves.</div>
+			</div>
+
+		  </div>
+		</li>
+	  </ul>
+	</div>
+
+	<div class = "cell" style="">
+	  <ul class="accordion" data-accordion data-allow-all-closed="true">
+		<li class="accordion-item" data-accordion-item>
+		  <a href="#" class="accordion-title" style="color:black"><h10>Games</h10></a>
+		  <div class="accordion-content" data-tab-content>
+			<div class="grid-x">
+			  <div class="cell">Conway's Game of Life</div>
+			  <div class="cell">Conway's Game of Life 2: Electric Boogaloo</div>
+			  <div class="cell">Conway's Game of Life 3: William Lu Simulator</div>
+			</div>
+
+		  </div>
+		</li>
+	  </ul>
+	</div>
+
+
+  </div>
+</div>
+{% endblock %}
