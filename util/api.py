@@ -7,22 +7,27 @@ import json
 import sqlite3
 
 from util.db_utils import getType
-from util.cap import capitalize #capitalizes names 
 
 def getkey(keyfile):
-    f = open(keyfile, 'r')
+    try:
+        f = open(keyfile, 'r')
+    except FileNotFoundError:
+        print("Missing key file, using default value...")
+        f = open(keyfile+"_default", 'r')
     l = f.read().split('\n')
     f.close()
     return l[0]
 
 weatherkey = getkey("util/keys.txt") #gets API key 
+mapkey = getkey("util/mapkeys.txt")
 
 #converts weather from Kelving to Farenheit
 def convert(temp):
     return round((temp-273.15) * 1.8 + 32)
-def weather(city):
+def weather(city, lat = False, lon = False):
     try:
-        site= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + weatherkey 
+        site= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + weatherkey if not lon else "http://api.openweathermap.org/data/2.5/weather?lon=" + str(lon) + "&lat=" + str(lat) + "&APPID=" + weatherkey
+        print(site)
         url = request.urlopen(site)
         wdict = json.loads(url.read())
         # print (dict)
@@ -73,3 +78,8 @@ def poke(poke = ''):
         return jason
     except HTTPError:
         return None
+
+def map(city, lat = False, lon = False):
+    q = "https://open.mapquestapi.com/staticmap/v5/map?key="+mapkey+"&center="+ (city if not lon else str(lon) + "," + str(lat)) +"&size=500,200@2x&type=light"
+    print(q)
+    return q

@@ -6,6 +6,7 @@ from urllib import request, parse
 import json
 import sqlite3
 from os import urandom
+from random import randint
 
 from flask import Flask, render_template, request, flash, redirect, url_for, make_response, Request
 
@@ -42,6 +43,7 @@ def home():
 @app.route("/weather/<city>")
 def weather(city):
     weather_stuff = api.weather(city.lower())
+    map_stuff = api.map(city.lower())
     if weather_stuff != None:
         reduced_types = getType(weather_stuff["main"])
         pokemon = api.poke_list(reduced_types)
@@ -56,7 +58,7 @@ def weather(city):
             res = 2
         print(res)
 
-        resp = make_response(render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, capitalize = capitalize))
+        resp = make_response(render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, capitalize = capitalize, mapurl = map_stuff))
         resp.set_cookie("last_loc", city.lower())
         return resp
     flash("Location does not exit.")
@@ -89,17 +91,38 @@ def search():
 
 @app.route("/random")
 def randloc():
-    pass
+    lat = randint(-90,90)
+    lon = randint(-180,180)
+    weather_stuff = api.weather(None, lat, lon)
+    map_stuff = api.map(None, lat, lon)
+    if weather_stuff != None:
+        if weather_stuff["name"]=="":
+            weather_stuff["name"]="???"
+        reduced_types = getType(weather_stuff["main"])
+        pokemon = api.poke_list(reduced_types)
+        rest = len(reduced_types)
+        res = 4
+        
+        if(rest > 5 and rest%3 == 0):
+            res = 3
+        elif(rest < 2):
+            res = 1
+        elif(rest < 4):
+            res = 2
+        print(res)
 
+        return render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, mapurl = map_stuff, capitalize = capitalize)
+    flash("Could not get data on random location.")
+    return redirect("/")    
 def capitalize(move):
     seperate = move.split(" ")
     result = ""
     for move in seperate:
-        result += move.capitalize() + " " 
-    seperate = result.split("-")
+        result += move.capitalize() + " "
+    seperate = result[:-1].split("-")
     result = ""
     for move in seperate:
-        result += move.capitalize() + " " 
+        result += move[0].upper() + move[1:] + " " 
     return result[:-1]
 
 def get_last_poke():
@@ -109,5 +132,5 @@ def get_last_loc():
     return request.cookies.get("last_loc")
 
 if __name__ == "__main__":
-	app.debug = True
-	app.run()
+    app.debug = True
+    app.run()
