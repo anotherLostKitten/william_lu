@@ -88,9 +88,9 @@ def search():
     flash("Bad search query.")
     return redirect("/")
 
-@app.route("/random")
-def randloc():
-    pass
+#@app.route("/random")
+#def randloc():
+#    pass
 
 def add_cache(pokes):
     '''stores each pokemon in a list to cookies'''
