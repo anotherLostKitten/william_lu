@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/foundation.css">
-    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/app.css">
-    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/min.css">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/foundation.min.css">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/app.min.css">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/min.min.css">
+	<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.css">
 
-    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.css">
-
+	<link rel = "stylesheet" href = "{{ url_for('static', filename='style.css')}}">
+	
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
     <!--- This is the webpage title --->
     <title>{% block title %}William Lu{% endblock %}</title>
   </head>
-  <body style = "font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;">
+  <body>
 	<!-- Navbar -->
     <div id="responsive-menu">
       <div class="top-bar foundation-5-top-bar">
@@ -24,10 +24,10 @@
 			  <li class="menu-text">Weather You'll See Pokemon</li>
 			  <li><a href="/">Home</a></li>
 			  {% if last_loc != None %}
-			  <li><a href="/weather">{{ last_loc }}</a></li>
+			  <li><a href="/weather/{{ last_loc }}">{{ last_loc }}</a></li>
 			  {% endif %}
 			  {% if last_poke != None %}
-			  <li><a href="/pokeinfo/{{ last_poke }}"></a>{{ last_poke }}</li>
+			  <li><a href="/pokeinfo/{{ last_poke }}">{{ last_poke }}</a></li>
 			  {% endif %}
 			</ul>
 	      </div>

@@ -5,17 +5,14 @@
 from urllib import request, parse
 import json
 import sqlite3
-from os import urandom
 
-from flask import Flask, render_template, request, flash, redirect, url_for, session
+from flask import Flask, render_template, request, flash, redirect, url_for, make_response, Request
 
 import util.api as api
 from util.db_utils import getType
 from util.cap import capitalize
 
 app = Flask(__name__)
-
-app.secret_key = urandom(32)
 
 colors = {'bug':('#3c9950','#1c4b27'),
           'dark':('#040707','#595978'),
@@ -43,32 +40,36 @@ def home():
 @app.route("/weather/<city>")
 def weather(city):
     weather_stuff = api.weather(city.capitalize())
-    reduced_types = set()
-    all_types = weather_stuff['pokemon'][0]['types']
-    for t in all_types:
-        reduced_types.add(t['type']['name'])
-    rest = len(reduced_types)
-    res = 4
+    if weather_stuff != None:
+        reduced_types = getType(weather_stuff["main"])
+        pokemon = api.poke_list(reduced_types)
+        rest = len(reduced_types)
+        res = 4
+        
+        if(rest > 5 and rest%3 == 0):
+            res = 3
+        elif(rest < 2):
+            res = 1
+        elif(rest < 4):
+            res = 2
+        print(res)
 
-    if(rest > 5 and rest%3 == 0):
-        res = 3
-    elif(rest < 2):
-        res = 1
-    elif(rest < 4):
-        res = 2
-    print(res)
-
-    return render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res)
-
+        resp = make_response(render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon))
+        resp.set_cookie("last_loc", city.lower())
+        return resp
+    flash("Location does not exit.")
+    return redirect("/")
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
-    poke_data = get_cache(name.lower())
+    poke_data = api.poke(name.lower())
     for move in poke_data['moves']:
         move['move']['name']=capitalize(move['move']['name'])
     for ability in poke_data['abilities']:
         ability['ability']['name']=capitalize(ability['ability']['name'])
     if poke_data != None:
-        return render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = set_last_poke(name))
+        res = make_response(render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke()))
+        res.set_cookie("last_poke", name.lower())
+        return res
     flash("Pokemon does not exist.")
     return redirect("/")
 
@@ -76,7 +77,7 @@ def pokeinfo(name):
 def search():
     q = str(request.args.get('q')).lower()
     if len(q) > 0 and 'q' in request.args:
-        chck = get_cache(q)
+        chck = api.poke(q)
         if chck != None:
             return redirect("/pokeinfo/"+q)
         chck = api.weather(q)
@@ -92,44 +93,11 @@ def search():
 def randloc():
     pass
 
-def add_cache(pokes):
-    '''stores each pokemon in a list to cookies'''
-    for i in pokes:
-        if i["name"].lower() not in session:
-            session[i["name"].lower()] = i
-
-def clear_cache():
-    '''clears cookies'''
-    session.clear()
-
-def get_cache(poke):
-    '''if a pokemon desn't exists in cookies, adds to cookies. regardless, returns pokemon data.'''
-    poke = poke.lower()
-    if poke not in session:
-        d = api.poke(poke)
-        print(d)
-        if d != None:
-            add_cache((d,))
-        return d
-    return session[poke]
-
 def get_last_poke():
-    if "last_poke" in session:
-        return session["last_poke"]
-    return None
-def set_last_poke(poke):
-    tmp = get_last_poke()
-    session["last_poke"] = poke.lower()
-    return tmp
+    return capitalize(request.cookies.get("last_poke"))
 
 def get_last_loc():
-    if "last_loc" in session:
-        return session["last_loc"]
-    return None
-def set_last_loc(loc):
-    tmp = get_last_loc()
-    session["last_loc"] = loc.lower()
-    return tmp
+    return capitalize(request.cookies.get("last_loc"))
 
 if __name__ == "__main__":
 	app.debug = True

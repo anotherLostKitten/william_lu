@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="grid-container" style="background-color: #f8f9fa; border-radius: 10px; border: 5px solid black;">
-	<div lass="grid-x grid-padding-x" style="background-color: white; border-radius: 10px;">
+	<div lass="grid-x grid-padding-x" style="border-radius: 10px;">
 		<div class="cell"> <center> <h1>{{name}}</h1> </center> </div>
 		<div class="cell"> <center> <img src="{{img}}"> </center> </div>
 		<div class="cell"><h3>   </h3></div>
@@ -12,7 +12,7 @@
     <div class="cell">Temperature Now: {{now}}F</div>
 		<div class="grid-x grid-margin-x">
     {% for t in types %}
-	    <div class="cell auto" style="background-color: {{colors[t][0]}}; border-radius: 5px; border: 1px solid black;">{{t.capitalize()}}</div>
+	    <div class="cell auto" style="background-color: {{colors[t][1]}}; border-radius: 5px; border: 3px solid {{colors[t][0]}}; text-align:center;">{{t.capitalize()}}</div>
     {% endfor %}
 		</div>
 
@@ -21,13 +21,15 @@
 
   <div class="grid-x grid-padding-x small-up-3 medium-up-3">
     {% for p in pokemon %}
-    <div class="cell">
-      <div class="card" style="border-radius: 5px; border: 1px solid black;">
-        <img src="{{p['sprites']['front_default']}}" width="100%">
-        <div class="card-section">
-        <h4><a href="/pokeinfo/{{ p['name'] }}">{{p['name'].capitalize()}}</a></h4>
-        </div>
-      </div>
+    <div class="cell pokehref">
+	  <a href="/pokeinfo/{{ p['name'] }}">
+		<div class="card" style="border-radius: 5px; border: 3px solid {{colors[p['types'][0]['type']['name']][0]}};">
+          <img src="{{p['sprites']['front_default']}}" width="100%">
+          <div class="card-divider" style="background-color:{{colors[p['types'][0]['type']['name']][1]}};text-align:center;">
+			<h4 style="text-align:center;">{{p['name'].capitalize()}}</h4>
+          </div>
+		</div>
+	  </a>
     </div>
     {% endfor %}
   </div>
