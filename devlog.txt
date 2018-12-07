@@ -197,3 +197,20 @@ adilG -- 2018-12-06 22:42
 Names of pokemons now displayed without hyperlink error.
 ==============================================================
 
+theodoreP -- 2018-12-07 03:29
+--------------------------------------------------------------
+argh
+reformated weather and pokemon display pages extensively
+modified type display colors, more things colorful
+hover effects on pokemon in weather view
+maps
+william lu
+random location
+docstrings
+capitalization actually working properly
+cookie storing functional, but caching api data impossible due to cookie size limits :(
+seperated functions to be more coherent in api.py
+learned you can pass in functions to jinja, very cool
+im going to bed now
+==============================================================
+
