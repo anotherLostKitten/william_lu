@@ -29,10 +29,10 @@ def weather(city):
         iconUrl="http://openweathermap.org/img/w/" + icon + ".png"
         input = dict['weather'][0]['main']
         result = getType(input.lower())
-        pokemons = [poke(i['name']) for i in sample(result,9)]
-        for p in pokemons:
-            p['name'] = capitalize(p['name'])
-        content = {'img':iconUrl,'name':dict["name"],'expl':dict["weather"][0]["description"],'max' : convert(dict["main"]["temp_max"]),'min': convert(dict["main"]["temp_min"]),'now' : convert(dict["main"]["temp"]),'pokemon': pokemons}
+        pokelist = [poke(i['name']) for i in sample(result,9)]
+        for p in pokelist:
+            p[p['name']] = capitalize(p['name'])
+        content = {'img':iconUrl,'name':dict["name"],'expl':dict["weather"][0]["description"],'max' : convert(dict["main"]["temp_max"]),'min': convert(dict["main"]["temp_min"]),'now' : convert(dict["main"]["temp"]),'pokemon': pokelist}
         return content
     except HTTPError:
         return None
