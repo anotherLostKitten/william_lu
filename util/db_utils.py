@@ -3,7 +3,7 @@ import urllib.request
 import json
 
 def getType(weather):
-'''uses weather info to get corresponding list of pokemon types'''
+    '''uses weather info to get corresponding list of pokemon types'''
     #print(weather)
     DB_FILE = "app.db"
     db = sqlite3.connect(DB_FILE)

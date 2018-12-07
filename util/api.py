@@ -9,6 +9,7 @@ import sqlite3
 from util.db_utils import getType
 
 def getkey(keyfile):
+    '''retrives api keys based on file name'''
     try:
         f = open(keyfile, 'r')
     except FileNotFoundError:
@@ -23,8 +24,11 @@ mapkey = getkey("util/mapkeys.txt")
 
 #converts weather from Kelving to Farenheit
 def convert(temp):
+    '''kelvin > ferienheit'''
     return round((temp-273.15) * 1.8 + 32)
+
 def weather(city, lat = False, lon = False):
+    '''weather info for a city or lattitude & longitude values'''
     try:
         site= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + weatherkey if not lon else "http://api.openweathermap.org/data/2.5/weather?lon=" + str(lon) + "&lat=" + str(lat) + "&APPID=" + weatherkey
         print(site)
@@ -39,6 +43,7 @@ def weather(city, lat = False, lon = False):
         return None
 
 def poke_list(types):
+    '''randomizez a list of 9 pokemon of certain types'''
     result = poke_list_full(types)
     shuffle(result)
     pokemons = []
@@ -46,11 +51,12 @@ def poke_list(types):
         tst = poke(i['name'])
         if tst['sprites']['front_default'] != None:
             pokemons.append(tst)
-            if len(pokemons) >= 9:
+            if len(pokemons) >= 9: # change 9 for more or less pokemon
                 break
     return pokemons
 
 def poke_list_full(ptype):
+    '''all pokemon of certain types'''
     print(ptype)
     pokemon = []
     for type in ptype:
@@ -65,6 +71,7 @@ def poke_list_full(ptype):
 
 
 def poke(poke = ''):
+    '''info on a specific pokemon'''
     poke = poke.lower()
     try:
         url = "https://pokeapi.co/api/v2/pokemon/"
@@ -80,6 +87,8 @@ def poke(poke = ''):
         return None
 
 def map(city, lat = False, lon = False):
+    '''map api i need to make a api knowledge base post on probably'''
     q = "https://open.mapquestapi.com/staticmap/v5/map?key="+mapkey+"&center="+ (city if not lon else str(lon) + "," + str(lat)) +"&size=500,200@2x&type=light"
     print(q)
     return q
+

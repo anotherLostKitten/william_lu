@@ -15,33 +15,35 @@ from util.db_utils import getType
 
 app = Flask(__name__)
 
-colors = {'bug':('#3c9950','#1c4b27'),
-          'dark':('#040707','#595978'),
-          'dragon':('#448a95','#62cad9'),
-          'electric':('#fafa72','#e2e32b'),
-          'fairy':('#961a45','#e91368'),
-          'fighting':('#994025','#ef6239'),
-          'fire':('#fd4b5a','#ab1f24'),
-          'flying':('#94b2c7','#4a677d'),
-          'ghost':('#4a677d','#33336b'),
-          'grass':('#27cb50','#147b3d'),
-          'ground':('#a8702d','#6e491f'),
-          'ice':('#d8f0fa','#86d2f5'),
-          'normal':('#ca98a6','#75525c'),
-          'poison':('#9b69da','#5e2d89'),
-          'psychic':('#f77abd','#a52a6c'),
-          'rock':('#8b4c35','#48190b'),
-          'steel':('#82bda9','#60756e'),
-          'water':('#8faffb','#144bc6')}
-
 app.secret_key = urandom(32)
+
+colors = {'bug':('#3c9950','#1c4b27', 'white'), # coloring to correspond to pokemon types.
+          'dark':('#040707','#595978', 'white'),
+          'dragon':('#448a95','#62cad9', 'black'),
+          'electric':('#e2e32b', '#fafa72', 'black'),
+          'fairy':('#961a45','#e91368', 'white'),
+          'fighting':('#994025','#ef6239', 'black'),
+          'fire':('#fd4b5a','#ab1f24', 'white'),
+          'flying':('#4a677d', '#94b2c7', 'black'),
+          'ghost':('#33336b', '#4a677d', 'white'),
+          'grass':('#147b3d', '#27cb50', 'white'),
+          'ground':('#a8702d','#6e491f', 'white'),
+          'ice':('#86d2f5', '#d8f0fa', 'black'),
+          'normal':('#75525c', '#ca98a6', 'black'),
+          'poison':('#5e2d89', '#9b69da', 'black'),
+          'psychic':('#a52a6c', '#f77abd', 'black'),
+          'rock':('#48190b', '#8b4c35', 'white'),
+          'steel':('#82bda9','#60756e', 'white'),
+          'water':('#8faffb','#144bc6', 'white')}
 
 @app.route("/")
 def home():
+    '''landing page'''
     return render_template("home.html", last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize)
 
 @app.route("/weather/<city>")
 def weather(city):
+    '''weather info for a particular city'''
     weather_stuff = api.weather(city.lower())
     map_stuff = api.map(city.lower())
     if weather_stuff != None:
@@ -59,22 +61,24 @@ def weather(city):
         print(res)
 
         resp = make_response(render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, capitalize = capitalize, mapurl = map_stuff))
-        resp.set_cookie("last_loc", city.lower())
+        resp.set_cookie("last_loc", city.lower()) # adding info on last location
         return resp
     flash("Location does not exit.")
     return redirect("/")
-@app.route("/pokeinfo/<name>" )
+@app.route("/pokeinfo/<name>")
 def pokeinfo(name):
+    '''information for a specific pokemon'''
     poke_data = api.poke(name.lower())
     if poke_data != None:
         res = make_response(render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize))
-        res.set_cookie("last_poke", name.lower())
+        res.set_cookie("last_poke", name.lower()) # adding info on last pokemon
         return res
     flash("Pokemon does not exist.")
     return redirect("/")
 
 @app.route("/search", methods=["GET"])
 def search():
+    '''redirects search appropriately based on what was searched for'''
     q = str(request.args.get('q')).lower()
     if q == "william lu":
         return redirect("/williamlu")
@@ -84,15 +88,13 @@ def search():
             return redirect("/pokeinfo/"+q)
         chck = api.weather(q)
         if chck != None:
-            return redirect("/weather/"+q)
-        else:
-            return redirect("/")
-            
+            return redirect("/weather/"+q)    
     flash("Bad search query.")
     return redirect("/")
 
 @app.route("/random")
 def randloc():
+    '''random location'''
     lat = randint(-90,90)
     lon = randint(-180,180)
     weather_stuff = api.weather(None, lat, lon)
@@ -119,9 +121,11 @@ def randloc():
 
 @app.route("/williamlu")
 def williamlu():
+    '''william who?'''
     return render_template("william_lu.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize)
 
 def capitalize(move):
+    '''capitalized series of words seperated by either hyphens or spaces'''
     seperate = move.split(" ")
     result = ""
     for move in seperate:
@@ -133,9 +137,11 @@ def capitalize(move):
     return result[:-1]
 
 def get_last_poke():
+    '''last pokemon accessed by user'''
     return request.cookies.get("last_poke")
 
 def get_last_loc():
+    '''last location accessed by user'''
     return request.cookies.get("last_loc")
 
 if __name__ == "__main__":
