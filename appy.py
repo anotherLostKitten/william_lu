@@ -5,12 +5,12 @@
 from urllib import request, parse
 import json
 import sqlite3
+from os import urandom
 
 from flask import Flask, render_template, request, flash, redirect, url_for, make_response, Request
 
 import util.api as api
 from util.db_utils import getType
-from util.cap import capitalize
 
 app = Flask(__name__)
 
@@ -33,13 +33,15 @@ colors = {'bug':('#3c9950','#1c4b27'),
           'steel':('#82bda9','#60756e'),
           'water':('#8faffb','#144bc6')}
 
+app.secret_key = urandom(32)
+
 @app.route("/")
 def home():
-    return render_template("home.html", last_loc = get_last_loc(), last_poke = get_last_poke())
+    return render_template("home.html", last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize)
 
 @app.route("/weather/<city>")
 def weather(city):
-    weather_stuff = api.weather(city.capitalize())
+    weather_stuff = api.weather(city.lower())
     if weather_stuff != None:
         reduced_types = getType(weather_stuff["main"])
         pokemon = api.poke_list(reduced_types)
@@ -54,7 +56,7 @@ def weather(city):
             res = 2
         print(res)
 
-        resp = make_response(render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon))
+        resp = make_response(render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, capitalize = capitalize))
         resp.set_cookie("last_loc", city.lower())
         return resp
     flash("Location does not exit.")
@@ -62,12 +64,8 @@ def weather(city):
 @app.route("/pokeinfo/<name>" )
 def pokeinfo(name):
     poke_data = api.poke(name.lower())
-    for move in poke_data['moves']:
-        move['move']['name']=capitalize(move['move']['name'])
-    for ability in poke_data['abilities']:
-        ability['ability']['name']=capitalize(ability['ability']['name'])
     if poke_data != None:
-        res = make_response(render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke()))
+        res = make_response(render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize))
         res.set_cookie("last_poke", name.lower())
         return res
     flash("Pokemon does not exist.")
@@ -93,11 +91,22 @@ def search():
 def randloc():
     pass
 
+def capitalize(move):
+    seperate = move.split(" ")
+    result = ""
+    for move in seperate:
+        result += move.capitalize() + " " 
+    seperate = result.split("-")
+    result = ""
+    for move in seperate:
+        result += move.capitalize() + " " 
+    return result[:-1]
+
 def get_last_poke():
-    return capitalize(request.cookies.get("last_poke"))
+    return request.cookies.get("last_poke")
 
 def get_last_loc():
-    return capitalize(request.cookies.get("last_loc"))
+    return request.cookies.get("last_loc")
 
 if __name__ == "__main__":
 	app.debug = True

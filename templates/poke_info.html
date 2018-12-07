@@ -10,11 +10,11 @@
 	</div>
 	<div class="cell medium-6 large-7">
 	  <div class="grid-y">
-		<div class="cell" style="text-align:center;"><br><h3>{{n.capitalize()}}</h3><hr></div>
+		<div class="cell" style="text-align:center;"><br><h3>{{capitalize(n)}}</h3><hr></div>
 		<div class="cell">
 		  <div class="grid-x grid-margin-x">
 			{% for type in data['types'] %}
-			<div class="cell auto" style="background-color: {{colors[type['type']['name']] [1]}}; border-radius: 5px; border: 3px solid {{colors[type['type']['name']] [0]}};text-align:center;">{{type['type']['name'].capitalize()}}</div>
+			<div class="cell auto" style="background-color: {{colors[type['type']['name']] [1]}}; border-radius: 5px; border: 3px solid {{colors[type['type']['name']] [0]}};text-align:center;">{{capitalize(type['type']['name'])}}</div>
 			{% endfor %}
 			
 		  </div>
@@ -30,7 +30,7 @@
 		  </div>
 		  <div class="cell"><br></div>
 		  {% for stat in data['stats'][::-1] %}
-		  <div class="cell medium-4 large-4">{{stat['stat']['name'].capitalize()}}: {{stat['base_stat']}}</div>
+		  <div class="cell medium-4 large-4">{{capitalize(stat['stat']['name'])}}: {{stat['base_stat']}}</div>
 		  {% endfor %}
 
 		</div>
@@ -44,7 +44,7 @@
 		  <div class="accordion-content" data-tab-content>
 			<div class="grid-x">
 			  {% for ability in data['abilities'] %}
-			  <div class="cell medium-3 large-3">{{ability['ability']['name']}}</div>
+			  <div class="cell medium-3 large-3">{{capitalize(ability['ability']['name'])}}</div>
 			  {% endfor %}
 			</div>
 
@@ -60,7 +60,7 @@
 		  <div class="accordion-content" data-tab-content>
 			<div class="grid-x">
 			  {% for move in data['moves'] %}
-			  <div class="cell medium-3 large-3">{{move['move']['name']}}</div>
+			  <div class="cell medium-3 large-3">{{capitalize(move['move']['name'])}}</div>
 			  {% endfor %}
 			</div>
 
@@ -76,7 +76,7 @@
 		  <div class="accordion-content" data-tab-content>
 			<div class="grid-x">
 			  {% for game in data['game_indices'][::-1] %}
-			  <div class="cell medium-3 large-3">{{game['version']['name'].capitalize()}}</div>
+			  <div class="cell medium-3 large-3">{{capitalize(game['version']['name'])}}</div>
 			  {% endfor %}
 			</div>
 

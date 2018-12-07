@@ -1,12 +1,13 @@
 # retrieves weather data, converts weather info into info about pokemon types, retrieves pokemon data
 
 from urllib import request, parse
-from urllib.error import HTTPError
-from random import sample, shuffle
+from urllib.error import HTTPError # error handling for bad api calls
+from random import sample, shuffle # needed to get random pokemons
 import json
 import sqlite3
 
 from util.db_utils import getType
+from util.cap import capitalize #capitalizes names 
 
 def getkey(keyfile):
     f = open(keyfile, 'r')
@@ -14,13 +15,14 @@ def getkey(keyfile):
     f.close()
     return l[0]
 
-weatherkey = getkey("util/keys.txt")
+weatherkey = getkey("util/keys.txt") #gets API key 
 
+#converts weather from Kelving to Farenheit
 def convert(temp):
     return round((temp-273.15) * 1.8 + 32)
 def weather(city):
     try:
-        site= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + weatherkey
+        site= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + weatherkey 
         url = request.urlopen(site)
         wdict = json.loads(url.read())
         # print (dict)
