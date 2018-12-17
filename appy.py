@@ -39,12 +39,12 @@ colors = {'bug':('#3c9950','#1c4b27', 'white'), # coloring to correspond to poke
 @app.route("/")
 def home():
     '''landing page'''
-    return render_template("home.html", last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize)
+    return render_template("home.html", last_loc = get_last_loc(), last_poke = get_last_poke(), spcap = spcap)
 
 @app.route("/weather/<city>")
 def weather(city):
     '''weather info for a particular city'''
-    weather_stuff = api.weather(city.lower())
+    weather_stuff = api.weather(city.lower().replace(' ', '+'))
     map_stuff = api.map(city.lower())
     if weather_stuff != None:
         reduced_types = getType(weather_stuff["main"])
@@ -60,7 +60,7 @@ def weather(city):
             res = 2
         print(res)
 
-        resp = make_response(render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, capitalize = capitalize, mapurl = map_stuff))
+        resp = make_response(render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, spcap = spcap, mapurl = map_stuff))
         resp.set_cookie("last_loc", city.lower()) # adding info on last location
         return resp
     flash("Location does not exit.")
@@ -68,9 +68,9 @@ def weather(city):
 @app.route("/pokeinfo/<name>")
 def pokeinfo(name):
     '''information for a specific pokemon'''
-    poke_data = api.poke(name.lower())
+    poke_data = api.poke(name.lower().replace(' ', '+'))
     if poke_data != None:
-        res = make_response(render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize))
+        res = make_response(render_template("poke_info.html", data = poke_data, n = name.lower(), colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), spcap = spcap))
         res.set_cookie("last_poke", name.lower()) # adding info on last pokemon
         return res
     flash("Pokemon does not exist.")
@@ -79,10 +79,10 @@ def pokeinfo(name):
 @app.route("/search", methods=["GET"])
 def search():
     '''redirects search appropriately based on what was searched for'''
-    q = str(request.args.get('q')).lower()
-    if q == "william lu":
-        return redirect("/williamlu")
+    q = str(request.args.get('q')).lower().replace(' ', '+')
     if len(q) > 0 and 'q' in request.args:
+        if q == "william+lu":
+            return redirect("/williamlu")
         chck = api.poke(q)
         if chck != None:
             return redirect("/pokeinfo/"+q)
@@ -115,25 +115,21 @@ def randloc():
             res = 2
         print(res)
 
-        return render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, mapurl = map_stuff, capitalize = capitalize)
+        return render_template("weather.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), **weather_stuff, types = reduced_types, len_cell = res, pokemon = pokemon, mapurl = map_stuff, spcap = spcap)
     flash("Could not get data on random location.")
     return redirect("/")    
 
 @app.route("/williamlu")
 def williamlu():
     '''william who?'''
-    return render_template("william_lu.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), capitalize = capitalize)
+    return render_template("william_lu.html", colors = colors, last_loc = get_last_loc(), last_poke = get_last_poke(), spcap = spcap)
 
-def capitalize(move):
-    '''capitalized series of words seperated by either hyphens or spaces'''
-    seperate = move.split(" ")
+def spcap(move):
+    '''capitalize series of words seperated by either hyphens, plusses or spaces'''
+    seperate = move.replace('+', ' ').replace('-', ' ').split(' ')
     result = ""
-    for move in seperate:
-        result += move.capitalize() + " "
-    seperate = result[:-1].split("-")
-    result = ""
-    for move in seperate:
-        result += move[0].upper() + move[1:] + " " 
+    for i in seperate:
+        result += i.capitalize() + ' '
     return result[:-1]
 
 def get_last_poke():

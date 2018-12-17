@@ -24,10 +24,10 @@
 			  <li class="menu-text">Weather You'll See Pokemon</li>
 			  <li><a href="/">Home</a></li>
 			  {% if last_loc != None %}
-			  <li><a href="/weather/{{ last_loc }}">{{ capitalize(last_loc) }}</a></li>
+			  <li><a href="/weather/{{ last_loc }}">{{ spcap(last_loc) }}</a></li>
 			  {% endif %}
 			  {% if last_poke != None %}
-			  <li><a href="/pokeinfo/{{ last_poke }}">{{ capitalize(last_poke) }}</a></li>
+			  <li><a href="/pokeinfo/{{ last_poke }}">{{ spcap(last_poke) }}</a></li>
 			  {% endif %}
 			</ul>
 	      </div>
